@@ -1,0 +1,33 @@
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+    display:flex;
+	background-color:#222222;
+	font-family: Arial, Helvetica, sans-serif, Verdana;
+}
+
+div.centerDiv
+{
+	margin:auto;
+	text-align: center;
+}
+
+p.big 
+{
+    font-size: 64;
+	color:#ccc;
+	margin: 10;
+}
+p.small
+{
+    margin:auto;
+    font-size: 14;
+	color:#444;
+}
+
+a.gameLink
+{
+	text-decoration: none;
+	color: #ccc;
+}
