@@ -26,8 +26,34 @@ p.small
 	color:#444;
 }
 
+p.label
+{
+    margin:auto;
+    font-size: 24;
+	color:#ccc;
+}
+
+p.normal
+{
+    margin:auto;
+    font-size: 16;
+	color:#888;
+	padding: 10px;
+}
+
 a.gameLink
 {
 	text-decoration: none;
 	color: #ccc;
+}
+
+table.centerTable
+{
+	color: #ccc;
+}
+
+td.centerTable
+{
+	padding: 25px;
+	text-align: center;
 }
