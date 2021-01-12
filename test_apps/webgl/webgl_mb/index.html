@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Project - WebGL Test - MB</title>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" style="width: 1024px; height: 768px; background: #231F20"></canvas>
+    <script src="Build/webgl_inst_shd.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/webgl_inst_shd.data.unityweb",
+        frameworkUrl: "Build/webgl_inst_shd.framework.js.unityweb",
+        codeUrl: "Build/webgl_inst_shd.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Project - WebGL Test - MB",
+        productVersion: "0.1",
+      });
+    </script>
+  </body>
+</html>
