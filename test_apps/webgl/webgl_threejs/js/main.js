@@ -99,7 +99,7 @@ function onMouseClick()
 		scene.remove(totalMesh);
 		totalMesh.dispose();
 		LIMIT = 4*LIMIT;
-		console.log("update instance mesh to", LIMIT);
+		console.log("update instanced mesh buffer to", LIMIT);
 		totalMesh = new THREE.InstancedMesh(sphereGeometry, sphereMaterial, LIMIT);		
 		totalMesh.receiveShadow = true;
 		totalMesh.castShadow = true;
