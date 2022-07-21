@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Promethean Application</title>
+	<style>
+		body {
+			position: absolute;
+			margin: 0px;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		#app_canvas {
+			width: 800px;
+			height: 800px;
+		}
+		#generateButton {
+			margin: 10px 0px;
+			padding: 5px 10px;
+			width: 100%;
+		}
+		#settings {
+			padding: 10px
+		}
+		label {
+			margin: 2px 10px;
+			width: 130px;
+			display: inline-block;
+		}
+		input {
+			margin: 2px 0px;
+		}
+		label, input, legend, button {
+			font-family: Helvetica;
+		}
+	</style>
+</head>
+
+<body>
+<table>
+	<tr>
+		<td>
+			<canvas id="app_canvas" width="800" height="800"></canvas>
+		</td>
+		<td id="settings">
+			<fieldset>
+			<legend>Level size</legend>
+			
+				<label for="level_height">Level height</label>
+				<input id="level_height" onchange="generate()" type="number" min="1" max="1024" value="64"><br/>
+				
+				<label for="level_width">Level width</label>
+				<input id="level_width" onchange="generate()" type="number" min="1" max="1024" value="64"><br/>
+				
+				<label for="level_border">Level border</label>
+				<input id="level_border" onchange="generate()" type="number" min="1" max="1024" value="1"><br/>
+			</fieldset>
+			
+			<fieldset>
+			<legend>Room size</legend>
+				<label for="room_min_width">Room min width</label>
+				<input id="room_min_width" onchange="generate()" type="number" min="1" max="1024" value="5"><br/>
+				
+				<label for="room_max_width">Room max width</label>
+				<input id="room_max_width" onchange="generate()" type="number" min="1" max="1024" value="7"><br/>
+				
+				<label for="room_min_height">Room min height</label>
+				<input id="room_min_height" onchange="generate()" type="number" min="1" max="1024" value="5"><br/>
+				
+				<label for="room_max_height">Room max height</label>
+				<input id="room_max_height" onchange="generate()" type="number" min="1" max="1024" value="7"><br/>
+				
+				<label for="room_border">Room border</label>
+				<input id="room_border" onchange="generate()" type="number" min="1" max="1024" value="1"><br/>
+			</fieldset>
+				
+			<fieldset>
+			<legend>Generate</legend>
+				
+				<label for="rooms_count">Rooms count</label>
+				<input id="rooms_count" onchange="generate()" type="number" min="1" max="1024" value="45"><br/>
+				
+				<label for="overlap_rooms">Overlap rooms</label>
+				<input id="overlap_rooms" onchange="generate()" type="checkbox"><br/>
+			</fieldset>
+			
+			<button id="generateButton" onclick="generate()">Generate</button>
+		</td>
+	</tr>
+</table>
+
+<script type="module">
+	import * as exports from "./promethean.js";
+	
+	const canvas = document.getElementById("app_canvas");
+    const canvas_ctx = canvas.getContext("2d");
+	
+	const clear_color = "rgb(125, 125, 125)";
+	const tile_color = "rgba(196, 196, 196, 0.5)";
+	const wall_color = "rgba(196, 64, 64, 0.5)";
+	const center_color = "rgba(64, 196, 64, 0.5)";
+	
+	canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
+	canvas_ctx.fillStyle = clear_color;
+	canvas_ctx.fillRect(0, 0, canvas.width, canvas.height);
+	
+	function generate(){
+		const level_height = document.getElementById("level_height").value;
+		const level_width = document.getElementById("level_width").value;
+		const room_min_width = document.getElementById("room_min_width").value;
+		const room_max_width = document.getElementById("room_max_width").value;
+		const room_min_height = document.getElementById("room_min_height").value;
+		const room_max_height = document.getElementById("room_max_height").value;
+		const rooms_count = document.getElementById("rooms_count").value;
+		const level_border = document.getElementById("level_border").value;
+		const room_border = document.getElementById("room_border").value;
+		const overlap_rooms = document.getElementById("overlap_rooms").checked;
+		
+		const gen_ptr = exports.create_generator(level_height, 
+												 level_width, 
+												 room_min_width, 
+												 room_max_width, 
+												 room_min_height, 
+												 room_max_height, 
+												 rooms_count, 
+												 level_border, 
+												 room_border, 
+												 overlap_rooms,
+												 true, true, true, true);
+		const level_ptr = exports.generate(gen_ptr);
+		const height = exports.level_size(level_ptr, 0);
+		const width = exports.level_size(level_ptr, 1);
+		const level_tiles = exports.level_tiles(level_ptr);
+		
+		canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
+		canvas_ctx.fillStyle = clear_color;
+		canvas_ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		const map_size = height > width ? height : width;
+		const tile_size = canvas.width / (map_size);  // the number of pixels in one tile
+		let width_shift = 0;
+		let height_shift = 0;
+		if(width > height){
+			height_shift = (width - height) * tile_size / 2;
+		}
+		else if(height > width){
+			width_shift = (height - width) * tile_size / 2;
+		}
+				
+		for(let x = 0; x < height; x++){
+			for(let y = 0; y < width; y++){
+				const tile = level_tiles[x * width + y];
+				if(tile == 0){
+					canvas_ctx.fillStyle = tile_color;
+					canvas_ctx.strokeStyle = tile_color
+					canvas_ctx.fillRect(width_shift + y * tile_size, height_shift + x * tile_size, tile_size, tile_size);
+					canvas_ctx.strokeRect(width_shift + y * tile_size, height_shift + x * tile_size, tile_size, tile_size);
+				}
+				else if(tile > 1){
+					canvas_ctx.fillStyle = wall_color;
+					canvas_ctx.strokeStyle = wall_color
+					canvas_ctx.fillRect(width_shift + y * tile_size, height_shift + x * tile_size, tile_size, tile_size);
+					canvas_ctx.strokeRect(width_shift + y * tile_size, height_shift + x * tile_size, tile_size, tile_size);
+				}
+			}
+		}
+		
+		const stat_ptr = exports.level_statistics(level_ptr);
+		const stat_rooms = exports.statistics_rooms_count(stat_ptr);
+		const stat_centers = exports.statistics_room_centers(stat_ptr);
+		for(let i = 0; i < stat_rooms; i++){
+            canvas_ctx.beginPath();
+			canvas_ctx.fillStyle = center_color;
+            canvas_ctx.strokeStyle = center_color;
+            canvas_ctx.arc(width_shift + stat_centers[2*i + 1] * tile_size, height_shift + stat_centers[2*i] * tile_size, 4, 0, Math.PI*2, false);
+            canvas_ctx.stroke();
+			canvas_ctx.fill();
+		}
+	}
+	
+	window.generate = generate;
+</script>
+</body>
+</html>
