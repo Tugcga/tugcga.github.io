@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="grid_blue_32.ico">
+        <title>Navmesh Baker</title>
+    </head>
+    <body>
+        <div id="central_div">
+            <canvas id="canvas"></canvas>
+            <div id="settings_pannel">
+                <label id="file_input_label" for="file_input">Load OBJ</label>
+                <input type="file" id="file_input" style="display: none;" accept=".obj"/>
+                <div id="settings_div">
+                    <fieldset>
+                        <legend>Rasterisation</legend>
+                        <label class="settings" for="settings_cell_size">Cell Size:</label>
+                        <input id="settings_cell_size" onchange="on_change_settings()" type="number" min="0.05" value="0.3" step="0.05" lang="en"><br/>
+    
+                        <label class="settings" for="settings_cell_height">Cell Height:</label>
+                        <input id="settings_cell_height" onchange="on_change_settings()" type="number" min="0.0001" value="0.2" step="0.05" lang="en"><br/>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>Agent</legend>
+                        <label class="settings" for="settings_agent_height">Agent Height:</label>
+                        <input id="settings_agent_height" onchange="on_change_settings()" type="number" min="0.0001" value="2.0" step="0.5" lang="en"><br/>
+    
+                        <label class="settings" for="settings_agent_radius">Agent Radius:</label>
+                        <input id="settings_agent_radius" onchange="on_change_settings()" type="number" min="0.0001" value="0.6" step="0.1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_agent_max_climb">Agent Max Climb:</label>
+                        <input id="settings_agent_max_climb" onchange="on_change_settings()" type="number" min="0.0001" value="0.9" step="0.1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_agent_max_slope">Agent Max Slope:</label>
+                        <input id="settings_agent_max_slope" onchange="on_change_settings()" type="number" min="0.1" max="90.0" value="45.0" step="5.0" lang="en"><br/>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>Meshing</legend>
+                        <label class="settings" for="settings_region_min_size">Region Min Size:</label>
+                        <input id="settings_region_min_size" onchange="on_change_settings()" type="number" min="1" max="2048" value="8" step="1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_region_merge_size">Region Merge Size:</label>
+                        <input id="settings_region_merge_size" onchange="on_change_settings()" type="number" min="1" max="64" value="20" step="1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_edge_max_len">Edge Max Length:</label>
+                        <input id="settings_edge_max_len" onchange="on_change_settings()" type="number" min="0.001" value="12.0" step="1.0" lang="en"><br/>
+    
+                        <label class="settings" for="settings_edge_max_error">Edge Max Error:</label>
+                        <input id="settings_edge_max_error" onchange="on_change_settings()" type="number" min="0.001" value="1.3" step="0.1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_verts_per_poly">Vertices per Polygon:</label>
+                        <input id="settings_verts_per_poly" onchange="on_change_settings()" type="number" min="3" max="64" value="6" step="1" lang="en"><br/>
+    
+                        <label class="settings" for="settings_detail_sample_distance">Detail Sample Distance:</label>
+                        <input id="settings_detail_sample_distance" onchange="on_change_settings()" type="number" min="0.001" value="6.0" step="1.0" lang="en"><br/>
+    
+                        <label class="settings" for="settings_detail_sample_maximum_error">Detail Sample Error:</label>
+                        <input id="settings_detail_sample_maximum_error" onchange="on_change_settings()" type="number" min="0.001" value="1.0" step="0.1" lang="en"><br/>
+                    </fieldset>
+    
+                    <button id="bake_button">Bake navmesh</button>
+
+                    <button id="export_button">Export navmesh</button>
+                </div>
+            </div>
+        </div>
+        
+        <script src="./index.js"></script>
+    </body>
+</html>
