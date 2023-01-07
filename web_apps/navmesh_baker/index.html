@@ -14,6 +14,12 @@
                 <input type="file" id="file_input" style="display: none;" accept=".obj"/>
                 <div id="settings_div">
                     <fieldset>
+                        <legend>Scene</legend>
+                        <label class="settings" for="settings_scale">Internal scale:</label>
+                        <input id="settings_scale" onchange="on_change_settings()" type="number" min="0.01" value="1.0" step="0.25" lang="en"><br/>
+                    </fieldset>
+
+                    <fieldset>
                         <legend>Rasterisation</legend>
                         <label class="settings" for="settings_cell_size">Cell Size:</label>
                         <input id="settings_cell_size" onchange="on_change_settings()" type="number" min="0.05" value="0.3" step="0.05" lang="en"><br/>
