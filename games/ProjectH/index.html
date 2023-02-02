@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <title>Project H</title>
+</head>
+
+<body>
+    <div id="window">
+        <canvas id="canvas" tabindex="0" height="750" width="1200">Your browser does not support the canvas.</canvas>
+        <script type="module" src="./build/module.js"></script>
+
+        <div id="ui">
+            <div id="ui_content">
+                <table>
+                    <tr><td><p class="label">In-level items:</p></td><td><p class="label" id="level_count">0</p></td></tr>
+                    <tr><td><p class="label">Visible items:</p</td><td><p class="label" id="visible_count">0</p></td></tr>
+                </table>
+            </div>
+
+            <div id="ui_content_right">
+                <table>
+                    <tr><td><p class="label">FPS:</p></td><td><p class="label" id="fps">0.0</p></td></tr>
+                </table>
+            </div>
+
+            <div id="loading">
+                <p class="label center_label">Generate the level</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
