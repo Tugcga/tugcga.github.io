@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+        <title>Delaunay Demo</title>
+    </head>
+    <body>
+        <div id="central_div">
+            <button class="points_button" id="btn_0" onclick="generate(10)">10</button>
+            <button class="points_button" id="btn_1" onclick="generate(100)">100</button>
+            <button class="points_button" id="btn_2" onclick="generate(1000)">1000</button>
+            <button class="points_button" id="btn_3"onclick="generate(12000)">12000</button>
+            <canvas id="canvas"></canvas>
+        </div>
+        <script type="module">
+            import init, { BVHNode, build_triangulation } from "./delaunay.js";
+
+            async function wasm_run() {
+                await init();
+
+                const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+
+                var canvas_width = document.body.clientWidth;
+                var canvas_height = document.body.clientHeight - 3;
+
+                var points = [];
+                var triangles = [];
+                var bvh = undefined;
+                var cursor_position = [0, 0];
+                var sample_coordinates = [];
+
+                function draw_canvas() {
+                    ctx.clearRect(0, 0, canvas_width, canvas_height);
+                    ctx.save();
+                    ctx.fillStyle = "rgb(40, 40, 40)";
+                    ctx.fillRect(0, 0, canvas_width, canvas_height);
+                    ctx.restore();
+
+                    if(sample_coordinates.length == 6) {
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.fillStyle = "rgb(143, 186, 173)";
+                        ctx.strokeStyle = "rgb(143, 186, 173)";
+                        ctx.moveTo(sample_coordinates[0], sample_coordinates[1]);
+                        ctx.lineTo(sample_coordinates[2], sample_coordinates[3]);
+                        ctx.lineTo(sample_coordinates[4], sample_coordinates[5]);
+                        ctx.lineTo(sample_coordinates[0], sample_coordinates[1]);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+
+                    ctx.save();
+                    ctx.fillStyle = "rgb(129, 129, 129)";
+                    const points_count = points.length / 2;
+                    for(let i = 0; i < points_count; i++) {
+                        const x = points[2*i];
+                        const y = points[2*i + 1];
+                        ctx.beginPath();
+                        ctx.arc(x, y, 2, 0, 2 * Math.PI);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+
+                    ctx.save();
+                    ctx.strokeStyle = "rgb(129, 129, 129)";
+                    const triangles_count = triangles.length / 3;
+                    for(let i = 0; i < triangles_count; i++) {
+                        ctx.beginPath();
+                        const a = triangles[3*i]; const a_x = points[2*a]; const a_y = points[2*a + 1];
+                        const b = triangles[3*i + 1]; const b_x = points[2*b]; const b_y = points[2*b + 1];
+                        const c = triangles[3*i + 2]; const c_x = points[2*c]; const c_y = points[2*c + 1];
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(b_x, b_y);
+                        ctx.lineTo(c_x, c_y);
+                        ctx.lineTo(a_x, a_y);
+                        ctx.stroke();
+                    }
+                    ctx.restore();
+                }
+
+                function update_canvas() {
+                    canvas_width = document.body.clientWidth;
+                    canvas_height = document.body.clientHeight - 3;
+
+                    canvas.width = canvas_width;
+                    canvas.height = canvas_height;
+
+                    draw_canvas();
+                }
+
+                onresize = (event) => {
+                    update_canvas();
+                };
+                onmousemove = (event) => {
+                    var rect = canvas.getBoundingClientRect();
+                    cursor_position[0] = event.clientX - rect.left;
+                    cursor_position[1] = event.clientY - rect.top;
+
+                    if(bvh) {
+                        sample_coordinates = bvh.sample(cursor_position[0], cursor_position[1]);
+                    }
+
+                    draw_canvas();
+                };
+
+                update_canvas();
+
+                generate(10);
+
+                function generate(n) {
+                    const x_min = 10;
+                    const y_min = 10;
+                    const x_max = canvas_width - 10;
+                    const y_max = canvas_height - 10;
+
+                    points = []
+
+                    for(let i = 0; i < n; i++) {
+                        const x = Math.random() * (x_max - x_min) + x_min;
+                        const y = Math.random() * (y_max - y_min) + y_min;
+
+                        points.push(x, y);
+                    }
+
+                    triangles = build_triangulation(points);
+                    bvh = new BVHNode(points, triangles);
+
+                    draw_canvas();
+                }
+
+                window.generate = generate;
+            };
+
+            wasm_run();
+        </script>
+    </body>
+</html>
