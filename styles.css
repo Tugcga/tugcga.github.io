@@ -3,7 +3,7 @@ html, body {
     width:100%;
     margin:0;
     display:flex;
-	background-color:#222222;
+	background-color: #222222;
 	font-family: Arial, Helvetica, sans-serif, Verdana;
 }
 
@@ -26,11 +26,24 @@ p.small
 	color:#444;
 }
 
-p.label
+p.label, a.label, td.tdRight
 {
     margin:auto;
     font-size: 24;
 	color:#ccc;
+	text-decoration: none;
+}
+
+a.label
+{
+	background-color: #444;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+td.tdRight 
+{
+	text-align: right;
 }
 
 p.normal
@@ -52,8 +65,17 @@ table.centerTable
 	color: #ccc;
 }
 
-td.centerTable
+td.centerTable, td.leftTable
 {
 	padding: 25px;
+}
+
+td.centerTable
+{
 	text-align: center;
+}
+
+td.leftTable
+{
+	text-align: left;
 }
