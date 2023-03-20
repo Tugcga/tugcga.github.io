@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <title>Project C</title>
+</head>
+
+<body>
+    <audio src="assets\\audio\\click_03.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\click_02.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\window_close.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\window_open_02.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\steps.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\time_in.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\time_out.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\monster_explosion.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\collect_03.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\finish.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\explosion_fail_03.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\shot_player.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\shot_monster.ogg" preload="auto"></audio>
+    <audio src="assets\\audio\\use_shield_02.ogg" preload="auto"></audio>
+
+    <div id="canvas_wrapper">
+        <canvas id="game_canvas" tabindex="0" width="640" height="480">Your browser does not support the canvas.</canvas>
+        <canvas id="ui_canvas" tabindex="0" width="640" height="480"></canvas>
+        <div class="ui_level", id="ui_level">0</div>
+        <div id="ui_perks">
+            <p class="ui_perk_label" id="ui_p_skillpoints">Perk points: 0</p>
+            <div id="ui_div_perk_0" class="ui_perk_button">
+                <table class="ui_perk_item"><tr>
+                    <td><img src="assets\icons\temp_perk.png" id="ui_img_perk_0"></td>
+                    <td>
+                        <p class="ui_perk_description" id="ui_p_perk_0"></p>
+                        <p class="ui_perk_upgrade_points" id="ui_s_perk_0"></p>
+                    </td>
+                </tr></table>
+            </div>
+            <div id="ui_div_perk_1" class="ui_perk_button">
+                <table class="ui_perk_item"><tr>
+                    <td><img src="assets\icons\temp_perk.png" id="ui_img_perk_1"></td>
+                    <td>
+                        <p class="ui_perk_description" id="ui_p_perk_1"></p>
+                        <p class="ui_perk_upgrade_points" id="ui_s_perk_1"></p>
+                    </td>
+                </tr></table>
+            </div>
+            <div id="ui_div_perk_2" class="ui_perk_button">
+                <table class="ui_perk_item"><tr>
+                    <td><img src="assets\icons\temp_perk.png"  id="ui_img_perk_2"></td>
+                    <td>
+                        <p class="ui_perk_description" id="ui_p_perk_2"></p>
+                        <p class="ui_perk_upgrade_points" id="ui_s_perk_2"></p>
+                    </td>
+                </tr></table>
+            </div>
+        </div>
+        <div id="ui_start_page" class="ui_start_page">
+            <p id="ui_loading_label">Loading...</p>
+            <div class="ui_game_score", id="ui_game_score"></div>
+            <div id="ui_button_start", class="ui_button">Start</div>
+            <div id="ui_button_highscore", class="ui_button">Highscore</div>
+
+            <div id="ui_highscore", class="ui_highscore">
+                <table id="ui_highscore_table">
+                </table>
+
+                <div class="ui_button" id="ui_highscore_close">Close</div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./build/index.js"></script>
+</body>
+
+</html>

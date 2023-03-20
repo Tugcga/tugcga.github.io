@@ -1,0 +1,173 @@
+body, html {
+    background-color: rgb(64, 64, 64);
+    height:100%;
+    width:100%;
+    margin:0;
+}
+
+#canvas_wrapper{
+    position: relative;
+    width: 640px;
+    height:480px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+#game_canvas, #ui_canvas{
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    width: 640px;
+    height: 480px;
+}
+
+table.ui_perk_item {
+    pointer-events: none;
+}
+
+#ui_perks{
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    width: 320px;
+    height: 330px;
+    background-color: rgba(32, 32, 32, 0.5);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    user-select: none;
+    visibility: hidden;
+}
+
+#ui_level, div.ui_game_score {
+    position: absolute;
+    user-select: none;
+    top: 11px;
+    width: 640px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: rgba(240, 240, 240, 0.75);
+    text-shadow: 0px 0 20px rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+}
+
+div.ui_game_score {
+    top: 60px;
+    visibility: hidden;
+}
+
+#ui_start_page {
+    position: absolute;
+    visibility: visible;
+    user-select: none;
+    width: 0px;
+    height: 0px;
+    background-color: rgba(153, 198, 240, 0.15);
+    backdrop-filter: blur(20px);
+}
+
+div.ui_button {
+    width: 180px;
+    height: 40px;
+    background-color: #687077;
+    color:beige;
+    line-height: 40px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+div.ui_highscore {
+    position: absolute;
+    width: 450px;
+    height: 330px;
+    background-color: rgb(73, 73, 80);
+    box-shadow: 0px 0px 20px 0px #00000065;
+    visibility: hidden;
+}
+
+#ui_highscore_table {
+    width: 75%; 
+    margin: auto;
+    padding: 10px;
+}
+
+td.ui_highscore_title_cell, td.ui_highscore_content_cell {
+    color: rgb(192, 192, 192);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+td.ui_highscore_content_cell {
+    font-size: 14px;
+    font-weight: normal;
+    padding: 4px;
+}
+
+#ui_highscore_close {
+    position: absolute;
+    visibility: hidden;
+}
+
+#ui_loading_label {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    color: rgb(128, 128, 128);
+}
+
+p.ui_perk_label {
+    padding: 0;
+    margin: 0;
+    color: rgb(223, 223, 223);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+p.ui_perk_description, p.ui_perk_upgrade_points {
+    margin: 0px 10px 0px 10px;
+    color: rgb(192, 192, 192);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+p.ui_perk_upgrade_points {
+    margin: 10px 10px 0px 10px;
+    font-size: 12px;
+    color: rgb(128, 128, 128);
+}
+
+div.ui_perk_button {
+    background-color: rgb(32, 32, 32);
+    padding: 10px;
+    margin: 10px 0px 5px 0px;
+}
+
+div.ui_button:hover {
+    box-shadow: 0px 0px 0px 5px #7f8a92 inset
+}
+
+div.ui_button:active {
+    box-shadow: 0px 0px 0px 5px #899aa8 inset
+}
+
+div.ui_perk_button:hover {
+    box-shadow: 0px 0px 0px 5px #767d86 inset
+}
+
+div.ui_perk_button:active {
+    box-shadow: 0px 0px 0px 5px #8a94a1 inset
+}
