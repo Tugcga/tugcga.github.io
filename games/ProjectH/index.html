@@ -11,12 +11,13 @@
 <body>
     <div id="window">
         <canvas id="canvas" tabindex="0" height="750" width="1200">Your browser does not support the canvas.</canvas>
+        <canvas id="map_canvas" tabindex="0" height="750" width="1200"></canvas>
         <script type="module" src="./build/module.js"></script>
 
         <div id="ui">
-            <div id="ui_content">
+            <div id="ui_content_left">
                 <table>
-                    <tr><td><p class="label">In-level items:</p></td><td><p class="label" id="level_count">0</p></td></tr>
+                    <tr><td><p class="label">Total items:</p></td><td><p class="label" id="level_count">0</p></td></tr>
                     <tr><td><p class="label">Visible items:</p</td><td><p class="label" id="visible_count">0</p></td></tr>
                 </table>
             </div>
@@ -28,7 +29,17 @@
             </div>
 
             <div id="loading">
-                <p class="label center_label">Generate the level</p>
+                <p class="label center_label">Generate the level...</p>
+            </div>
+
+            <div id="pause">
+                <p class="label controls_label">Control:</p>
+                <p class="label controls_content dark">move - <b>LMB</b><br>
+                    show/hide minimap - <b>m</b><br>
+                    increase/decrease minimap - <b>+/-</b><br>
+                    pause/continue - <b>Esc</b><br>
+                    spawn items - <b>s</b></p>
+                <p class="label center_label dark">Paused...</p>
             </div>
         </div>
     </div>

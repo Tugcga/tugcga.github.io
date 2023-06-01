@@ -18,23 +18,28 @@ div#window {
     box-shadow: 0px 0px 25px rgb(20, 20, 20);
 }
 
-div#ui, #window canvas {
+div#ui, #window, canvas {
     position: absolute;
     left:0px;
     right:0px;
     width: 1200px;
 }
 
-div#ui_content {
+div#ui_content_left {
     padding: 10px;
     position: absolute;
+    left: 25px;
+    top: 25px;
+    border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 div#ui_content_right {
     padding: 10px;
     position: absolute;
-    right: 0;
+    right: 25px;
+    top: 25px;
+    border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -47,7 +52,7 @@ p.label {
     color: rgb(196, 196, 196);
 }
 
-div#loading {
+div#loading, div#pause {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -57,6 +62,12 @@ div#loading {
     z-index: 2;
 }
 
+div#pause {
+    background-color: rgb(145, 145, 145, 0.0);
+    backdrop-filter: blur(50px);
+    visibility: hidden;
+}
+
 p.center_label {
     margin: 0;
     position: absolute;
@@ -64,4 +75,26 @@ p.center_label {
     left: 50%;
     transform: translateY(-50%);
     transform: translateX(-50%);
+}
+
+p.controls_label {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
+
+p.controls_content {
+    position: absolute;
+    left: 25px;
+    top: 45px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    padding: 2px 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}
+
+p.dark {
+    color: rgb(80, 80, 80);
 }
