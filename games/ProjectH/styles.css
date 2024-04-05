@@ -1,3 +1,4 @@
+/*default bg color*/
 body, html {
     height: 100%;
     width: 100%;
@@ -6,43 +7,53 @@ body, html {
     background-color: rgb(29, 29, 29);
 }
 
+/*these two classes for detect resizable elements (divs)*/
+.resizable_width {
+    width: 1200px;
+}
+
+.resizable_height {
+    height: 750px;
+}
+
+/*main game window*/
 div#window {
     position: relative;
     margin: 0px;
     padding: 0px;
-    left: calc(50% - 600px);
+    left: calc(50% - 600px);  /*define default size here, but in resize event JS will update these values*/
     top: calc(50% - 375px);
-    width: 1200px;
-    height: 750px;
 
     box-shadow: 0px 0px 25px rgb(20, 20, 20);
 }
 
-div#ui, #window, canvas {
+/*canvases and ui use all space of the parent game window*/
+div#ui, canvas {
     position: absolute;
     left:0px;
     right:0px;
-    width: 1200px;
 }
 
+/*common class for left and right ui columns*/
+.ui_content {
+    padding: 10px;
+    position: absolute;
+    top: 25px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*set position of the left ui column*/
 div#ui_content_left {
-    padding: 10px;
-    position: absolute;
     left: 25px;
-    top: 25px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
 }
 
+/*and here for the right*/
 div#ui_content_right {
-    padding: 10px;
-    position: absolute;
     right: 25px;
-    top: 25px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
 }
 
+/*simple text*/
 p.label {
     padding: 0px;
     margin: 0px;
@@ -52,22 +63,40 @@ p.label {
     color: rgb(196, 196, 196);
 }
 
-div#loading, div#pause {
+p.tiny_label {
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    color: rgb(196, 196, 196);
+}
+
+/*specify center align
+and add some padding*/
+#position {
+    text-align: center;
+    padding-top: 5px;
+}
+
+/*style for the full window screen
+it appears at the pause and in level loading*/
+.full_overlay {
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 1200px;
-    height: 750px;
     background-color: rgb(64, 64, 64);
     z-index: 2;
 }
 
+/*specify pause screen*/
 div#pause {
     background-color: rgb(145, 145, 145, 0.0);
     backdrop-filter: blur(50px);
     visibility: hidden;
 }
 
+/*text for the pause word in pause screen*/
 p.center_label {
     margin: 0;
     position: absolute;
@@ -78,17 +107,20 @@ p.center_label {
     padding: 20px 20px;
 }
 
+/*labels in the pause screen*/
 p.controls_label {
     position: absolute;
     left: 25px;
     top: 25px;
 }
 
+/*background of the help message*/
 p.plate {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
 }
 
+/*text in the pause screen*/
 p.controls_content {
     position: absolute;
     left: 25px;
@@ -99,6 +131,7 @@ p.controls_content {
     padding: 2px 10px;
 }
 
+/*additional color use in the pause screen*/
 p.dark {
     color: rgb(80, 80, 80);
 }
