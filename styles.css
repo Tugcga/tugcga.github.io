@@ -54,6 +54,14 @@ p.normal
 	padding: 10px;
 }
 
+p.error
+{
+    margin:auto;
+    font-size: 16;
+	color:#bf6b65;
+	padding: 10px;
+}
+
 a.gameLink
 {
 	text-decoration: none;
